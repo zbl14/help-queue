@@ -4,12 +4,14 @@ import PropTypes from "prop-types";
 const Ticket = (props) => {
   return (
     <React.Fragment>
-      <h3>
-        {props.location} - {props.names}
-      </h3>
-      <p>
-        <em>{props.issue}</em>
-      </p>
+      <div onClick={() => props.whenTicketClicked(props.id)}>
+        <h3>
+          {props.location} - {props.names}
+        </h3>
+        <p>
+          <em>{props.issue}</em>
+        </p>
+      </div>
     </React.Fragment>
   );
 };
@@ -18,6 +20,8 @@ Ticket.propTypes = {
   names: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   issue: PropTypes.string,
+  id: PropTypes.string,
+  whenTicketClicked: PropTypes.func,
 };
 
 export default Ticket;
