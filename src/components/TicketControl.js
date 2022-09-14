@@ -16,6 +16,26 @@ class TicketControl extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(
+      () => this.updateTicketElapsedWaitTime(),
+      1000
+    );
+  }
+
+  componentDidUpdate() {
+    console.log("component updated!");
+  }
+
+  componentWillUnmount() {
+    console.log("component unmounted!");
+    clearInterval(this.waitTimeUpdateTimer);
+  }
+
+  updateTicketElapsedWaitTime = () => {
+    console.log("tick");
+  };
+
   handleClick = () => {
     if (this.state.selectedTicket != null) {
       this.setState({
@@ -107,11 +127,6 @@ class TicketControl extends React.Component {
   }
 }
 
-TicketControl.propTypes = {
-  mainTicketList: PropTypes.object,
-  formVisibleOnPage: PropTypes.object,
-};
-
 const mapStateToProps = (state) => {
   return {
     mainTicketList: state.mainTicketList,
@@ -120,5 +135,10 @@ const mapStateToProps = (state) => {
 };
 
 TicketControl = connect(mapStateToProps)(TicketControl);
+
+TicketControl.propTypes = {
+  mainTicketList: PropTypes.object,
+  formVisibleOnPage: PropTypes.object,
+};
 
 export default TicketControl;
