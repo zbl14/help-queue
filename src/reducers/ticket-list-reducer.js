@@ -1,7 +1,7 @@
 import * as c from "./../actions/ActionTypes";
 
 const reducer = (state = {}, action) => {
-  const { names, location, issue, id } = action;
+  const { names, location, issue, id, formattedWaitTime, timeOpen } = action;
   switch (action.type) {
     case c.ADD_TICKET:
       return {
@@ -12,6 +12,8 @@ const reducer = (state = {}, action) => {
             location: location,
             issue: issue,
             id: id,
+            timeOpen: timeOpen,
+            formattedWaitTime: formattedWaitTime,
           },
         },
       };
@@ -27,6 +29,10 @@ const reducer = (state = {}, action) => {
       let newState = { ...state };
       delete newState[id];
       return newState;
+    case c.UPDATE_TIME:
+      const newTicket = { ...state[id], ...{ formattedWaitTime } };
+      const updatedState = { ...state, ...{ [id]: newTicket } };
+      return updatedState;
     default:
       return state;
   }
