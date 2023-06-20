@@ -1,9 +1,9 @@
 import rootReducer from "../../reducers/index";
-import { createStore } from "redux";
+import { configureStore } from "redux";
 import formVisibleReducer from "../../reducers/form-visible-reducer";
 import ticketListReducer from "../../reducers/ticket-list-reducer";
 
-let store = createStore(rootReducer);
+let store = configureStore(rootReducer);
 
 describe("rootReducer", () => {
   test("Should return default state if no action type is recognized", () => {
